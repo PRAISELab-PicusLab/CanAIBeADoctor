@@ -41,6 +41,14 @@ Each under:
 - `Prompt2`: Empathy-enhanced, patient-centered
 - `Caring`: LLM-refinement of physician-authored answers
 
+The framework compares LLM-generated and physician-authored answers across semantic similarity, readability,
+sentiment, and emotion. It includes both direct generation and LLM-based revision of expert responses, enabling evaluation of
+AI models as autonomous communicators and collaborative assistants in clinical settings. 
+
+<img width="1301" height="598" alt="image" src="https://github.com/user-attachments/assets/eb8f5cf1-6358-4998-983b-82f1b8b17c31" />
+
+
+
 ---
 
 ## 📊 Key Findings
@@ -99,11 +107,8 @@ We conducted **dual evaluations**:
 CanAIWriteLikeCaringDoctor/
 │
 ├── data/              # MedQuAD subset (processed)
-├── prompts/           # Prompt templates
-├── outputs/           # Generated model responses
 ├── analysis/          # Evaluation scripts (similarity, readability, emotion)
 ├── results/           # Figures, tables, evaluation metrics
-├── \_J\_B\_HI...pdf      # Paper PDF
 └── README.md          # This file
 
 ````
