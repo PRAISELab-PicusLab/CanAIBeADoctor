@@ -1,5 +1,4 @@
-# Can AI Write Like a Caring Doctor? 🩺🤖  
-**Evaluating Human Values in Clinical Communication**
+# 🩺🤖  Can AI Write Like a Caring Doctor? **Evaluating Human Values in Clinical Communication**
 
 ---
 
