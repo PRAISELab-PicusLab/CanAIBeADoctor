@@ -46,8 +46,6 @@ AI models as autonomous communicators and collaborative assistants in clinical s
 
 <img width="1301" height="598" alt="image" src="https://github.com/user-attachments/assets/eb8f5cf1-6358-4998-983b-82f1b8b17c31" />
 
-
-
 ---
 
 ## 📊 Key Findings
@@ -110,10 +108,10 @@ CanAIWriteLikeCaringDoctor/
 ├── results/           # Figures, tables, evaluation metrics
 └── README.md          # This file
 
-````
+```
 ---
 
-We welcome contributions to improve our work! To contribute, simply open a pull request or report issues on our [issue tracker](https://github.com/PRAISELab-PicusLab/DART/issues). We look forward to your improvements!
+We welcome contributions to improve our work! To contribute, simply open a pull request or report issues on our [issue tracker](https://github.com/PRAISELab-PicusLab/CanAIWriteLikeCaringDoctor/issues). We look forward to your improvements!
 
 👨‍💻 This project was developed by Mariano Barone, Antonio Romano, Giuseppe Riccio, Marco Postiglione, and Vincenzo Moscato at *University of Naples Federico II* – [PRAISE Lab - PICUS](https://github.com/PRAISELab-PicusLab/)
 
@@ -125,5 +123,5 @@ This work is licensed under a
 [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
 
 [![CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
----
 
+---
