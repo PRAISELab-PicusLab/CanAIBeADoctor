@@ -25,8 +25,8 @@ We introduce a comprehensive evaluation framework, test multiple LLM configurati
 
 Our framework assesses three core dimensions:
 
-| Dimension        | Metric(s)                             |
-|------------------|----------------------------------------|
+| Dimension         | Metric(s)                             |
+|-------------------|---------------------------------------|
 | Semantic Fidelity | Cosine Similarity (MiniLM)            |
 | Readability       | FKGL, Gunning Fog Index               |
 | Empathy           | Sentiment + Emotion Classification    |
@@ -36,25 +36,25 @@ We evaluated:
 - **Medical-Fine-Tuned LLM**: *PALMYRA-Med*
 
 Each under:
-- `Prompt1`: Standard formal medical tone
-- `Prompt2`: Empathy-enhanced, patient-centered
-- `Caring`: LLM-refinement of physician-authored answers
+- `Base Prompt`: Standard formal medical tone
+- `Empathy Prompt`: Empathy-enhanced, patient-centered
+- `Caring Prompt`: LLM-refinement of physician-authored answers
 
 The framework compares LLM-generated and physician-authored answers across semantic similarity, readability,
 sentiment, and emotion. It includes both direct generation and LLM-based revision of expert responses, enabling evaluation of
 AI models as autonomous communicators and collaborative assistants in clinical settings. 
 
-<img width="1301" height="598" alt="image" src="https://github.com/user-attachments/assets/eb8f5cf1-6358-4998-983b-82f1b8b17c31" />
+![CAIbeaD_Workflow](./CAIbeaD_Workflow.png)
 
 ---
 
 ## 📊 Key Findings
 
-| Configuration       | Empathy↑ | Readability↑ | Semantic Fidelity↑ |
-|---------------------|----------|--------------|---------------------|
-| **LLM GP v2**        | ✅       | ✅✅           | ✅                  |
-| **LLM FT Caring**    | ✅✅      | ✅             | ✅✅                 |
-| **Physician Answers**| ❌        | ❌             | ✅✅                 |
+| Configuration         | Empathy↑ | Readability↑ | Semantic Fidelity↑ |
+|-----------------------|----------|--------------|--------------------|
+| **LLM GP Empathy**    | ✅       | ✅✅        | ✅                |
+| **LLM FT Caring**     | ✅✅     | ✅          | ✅✅              |
+| **Physician Answers** | ❌       | ❌          | ✅✅              |
 
 - Prompt engineering significantly reduces negative sentiment (↓ up to **20%**).
 - LLMs improve readability by up to **2.5 grade levels**.
@@ -74,10 +74,10 @@ We use a **curated subset** of the [**MedQuAD**](https://huggingface.co/datasets
 
 | Variant              | Description                                           |
 |----------------------|-------------------------------------------------------|
-| `LLM GP`             | Mixtral + Prompt1                                     |
-| `LLM GP v2`          | Mixtral + Empathetic Prompt2                          |
-| `LLM FT`             | PALMYRA-Med + Prompt1                                 |
-| `LLM FT v2`          | PALMYRA-Med + Prompt2                                 |
+| `LLM GP`             | Mixtral + Base Prompt                                 |
+| `LLM FT`             | PALMYRA-Med + Base Prompt                             |
+| `LLM GP Empathy`     | Mixtral + Empathy Prompt                              |
+| `LLM FT Empathy`     | PALMYRA-Med + Empathy Prompt                          |
 | `LLM GP Caring`      | Mixtral rewrites physician answer                     |
 | `LLM FT Caring`      | PALMYRA rewrites physician answer                     |
 
@@ -88,12 +88,12 @@ We use a **curated subset** of the [**MedQuAD**](https://huggingface.co/datasets
 ## 👥 Human Evaluation
 
 We conducted **dual evaluations**:
-- 🩺 **Expert Simulation** (via GPT-4) → Precision & accuracy
+- 🩺 **Expert Simulation** (via GPT-4o) → Precision & accuracy
 - 🧑‍⚕️ **Patient Ratings** (n=30) → Trust, empathy, comprehensibility
 
 **Top-rated variant overall**: `LLM FT Caring`  
-**Most empathetic**: `LLM GP v2`  
-**Best trade-off**: `LLM FT v2` (high accuracy, better readability)
+**Most empathetic**: `LLM GP Empathy`  
+**Best trade-off**: `LLM FT Empathy` (high accuracy, better readability)
 
 ---
 
