@@ -1,4 +1,4 @@
-# 🩺🤖  Can AI be a Doctor? A Study of Empathy, Readability, and Alignment in Clinical LLMs**
+# 🩺🤖  Can AI be a Doctor? **A Study of Empathy, Readability, and Alignment in Clinical LLMs**
 
 ---
 
