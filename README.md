@@ -1,4 +1,4 @@
-# 🩺🤖  Can AI Write Like a Caring Doctor? **Evaluating Human Values in Clinical Communication**
+# 🩺🤖  Can AI be a Doctor? A Study of Empathy, Readability, and Alignment in Clinical LLMs**
 
 ---
 
