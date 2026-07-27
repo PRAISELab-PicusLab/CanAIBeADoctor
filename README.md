@@ -1,48 +1,40 @@
-# 🩺🤖  Can AI be a Doctor? **A Study of Empathy, Readability, and Alignment in Clinical LLMs**
+# 🩺🤖  Can "AI" be a Doctor? **A Study of Empathy, Readability, and Alignment in Clinical LLMs**
 
 ---
 
 ## 🧠 Overview
 
-As Large Language Models (LLMs) are increasingly deployed in healthcare, ensuring their **alignment with human values** such as **empathy**, **clarity**, and **semantic fidelity** becomes crucial.  
-This project investigates whether LLMs can produce **patient-centered clinical communication**, comparing general-purpose and medical-specialized models on over **16,400 expert-annotated QA pairs**.
-
-We introduce a comprehensive evaluation framework, test multiple LLM configurations, and propose a collaborative pipeline to enhance physician-authored responses.
+As Large Language Models (LLMs) are increasingly deployed in patient-facing healthcare settings, their **communicative alignment** with clinical standards — **semantic fidelity**, **readability**, and **affective resonance** — remains insufficiently quantified.
+This work conducts a multidimensional evaluation of general-purpose and domain-specialized LLMs across structured medical explanations and real-world consumer-authored consultations, comparing model-generated responses against physician-authored ones and testing whether LLMs can also act as **collaborative editors** of physician answers.
 
 ---
 
 ## 💡 Research Questions
 
-1. **Empathy:** Can LLMs convey emotional nuance as physicians do?
-2. **Readability:** Are AI-generated answers more accessible than physician-authored ones?
-3. **Prompting:** Does prompt engineering improve communication quality?
-4. **Collaboration:** Can LLMs enhance existing medical responses?
-5. **Value Alignment:** How do expert and patient evaluations differ in their preferences?
+1. **RQ1 (Empathy):** How do LLMs compare to human physicians in expressing empathy and emotional awareness in clinical communication?
+2. **RQ2 (Readability):** Do LLM-generated responses differ from physician-authored answers in linguistic readability?
+3. **RQ3 (Prompt-based Alignment):** Does empathy-oriented prompting improve emotional tone and readability while preserving semantic fidelity?
+4. **RQ4 (Human–AI Collaboration):** Can LLMs improve the clarity and emotional appropriateness of physician-authored responses through collaborative rewriting?
+5. **RQ5 (Expert–Patient Value Alignment):** To what extent do different LLM configurations satisfy the distinct preferences expressed by medical experts and patients?
 
 ---
 
 ## 🏗️ Methodology
 
-Our framework assesses three core dimensions:
+The framework assesses three core communicative dimensions:
 
-| Dimension         | Metric(s)                             |
-|-------------------|---------------------------------------|
-| Semantic Fidelity | Cosine Similarity (MiniLM)            |
-| Readability       | FKGL, Gunning Fog Index               |
-| Empathy           | Sentiment + Emotion Classification    |
+| Dimension           | Metric(s)                                                                 |
+|----------------------|----------------------------------------------------------------------------|
+| Semantic Fidelity    | Cosine similarity (BioBERT-mnli-snli-scinli-scitail-mednli-stsb encoder)  |
+| Readability          | Flesch–Kincaid Grade Level (FKGL), Gunning Fog Index (GFI)                |
+| Affective Resonance  | Sentiment classification (5-class) + fine-grained emotion classification (28 categories) |
 
-We evaluated:
-- **General-Purpose LLM**: *Mixtral*
-- **Medical-Fine-Tuned LLM**: *PALMYRA-Med*
+Three response conditions are compared against the physician reference:
+- **Base Prompt**: standard, formal medical tone (autonomous generation)
+- **Empathy Prompt**: empathy-oriented, accessibility-focused prompting (autonomous generation)
+- **Rephrase Prompt**: LLM-based collaborative rewriting of the physician's own answer
 
-Each under:
-- `Base Prompt`: Standard formal medical tone
-- `Empathy Prompt`: Empathy-enhanced, patient-centered
-- `Caring Prompt`: LLM-refinement of physician-authored answers
-
-The framework compares LLM-generated and physician-authored answers across semantic similarity, readability,
-sentiment, and emotion. It includes both direct generation and LLM-based revision of expert responses, enabling evaluation of
-AI models as autonomous communicators and collaborative assistants in clinical settings. 
+The pipeline supports both autonomous generation and collaborative revision of expert-authored responses, enabling evaluation of LLMs as both independent communicators and editing assistants. An independent **LLM-as-judge** evaluation (Qwen3-32B, scoring factual accuracy, completeness, and coherence) and a dedicated **prompt-sensitivity ablation** complement the main analysis.
 
 ![CAIbeaD_Workflow](./CAIbeaD_Workflow.png)
 
@@ -50,50 +42,50 @@ AI models as autonomous communicators and collaborative assistants in clinical s
 
 ## 📊 Key Findings
 
-| Configuration         | Empathy↑ | Readability↑ | Semantic Fidelity↑ |
-|-----------------------|----------|--------------|--------------------|
-| **LLM GP Empathy**    | ✅       | ✅✅        | ✅                |
-| **LLM FT Caring**     | ✅✅     | ✅          | ✅✅              |
-| **Physician Answers** | ❌       | ❌          | ✅✅              |
-
-- Prompt engineering significantly reduces negative sentiment (↓ up to **20%**).
-- LLMs improve readability by up to **2.5 grade levels**.
-- Collaborative rewriting yields responses **preferred by both patients and experts**.
+- Every baseline LLM (Mixtral, MedGemma, GPT-5, Claude Sonnet 4.5) is **significantly more complex** than physician-authored text on both datasets (complexity order: Mixtral < MedGemma < GPT < Claude); Claude_Base reaches up to ~2× the physician FKGL.
+- **Empathy** and **Rephrase** prompting substantially reduce linguistic complexity, frequently pushing output **to or below** physician-level readability (all p < 0.001).
+- Both strategies **overshoot** physician-level *caring* emotion (up to 6–20× the physician baseline on MedQuAD), rather than simply matching it — a systematic overcorrection.
+- Empathy prompting's effect on sentiment alignment is **inconsistent and architecture-dependent**: it lowers Very Negative sentiment everywhere, but for Claude it can shift sentiment *further* from the physician distribution.
+- **Rephrase** configurations achieve the **highest semantic fidelity** to physician answers on both datasets (best: Gemini_Rephrase, µ up to 0.92), confirmed independently by the LLM-as-judge evaluation.
+- No LLM configuration surpasses physicians on expert-rated **Accuracy** or **Precision**; the sole exception is **Style** on MedRedQA, where every Rephrase configuration matches or exceeds the physician's own expert score.
+- Patients consistently prefer rewritten (Rephrase) variants for trust, comprehensibility, and emotional tone.
+- A prompt-sensitivity ablation confirms these effects reflect genuine properties of the Empathy/Rephrase strategies, not artifacts of specific prompt wording (readability results show some model-dependent sensitivity, mainly for Mixtral).
 
 ---
 
-## 🧪 Dataset
-We use a **curated subset** of the [**MedQuAD**](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset) dataset:
-- 16,400 QA pairs
-- Sourced from NIH websites (e.g., MedlinePlus, cancer.gov)
-- Covers 37 question types (symptoms, treatment, side effects)
+## 🧪 Datasets
+
+- **[MedQuAD](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset)**: 47,457 QA pairs from 12 authoritative NIH sources (MedlinePlus, cancer.gov, niddk.nih.gov). A category-stratified, readability-driven subset of **231 representative questions** (16 question types) is used for cross-architecture evaluation.
+- **MedRedQA**: ~51,000 consumer question / verified-expert-answer pairs sourced from the r/AskDocs subreddit (2013–2022). A linguistically clustered subset of **200 representative samples** is used, selected from genuine long-form physician answers.
 
 ---
 
 ## 🤖 Models & Prompts
 
-| Variant              | Description                                           |
-|----------------------|-------------------------------------------------------|
-| `LLM GP`             | Mixtral + Base Prompt                                 |
-| `LLM FT`             | PALMYRA-Med + Base Prompt                             |
-| `LLM GP Empathy`     | Mixtral + Empathy Prompt                              |
-| `LLM FT Empathy`     | PALMYRA-Med + Empathy Prompt                          |
-| `LLM GP Caring`      | Mixtral rewrites physician answer                     |
-| `LLM FT Caring`      | PALMYRA rewrites physician answer                     |
+| Variant                  | Description                                              |
+|---------------------------|-----------------------------------------------------------|
+| `Mixtral_Base`             | Mixtral + Base Prompt                                    |
+| `MedGemma_Base`            | MedGemma (Gemma 3, medically fine-tuned) + Base Prompt    |
+| `GPT_Base`                 | GPT-5 + Base Prompt                                       |
+| `Claude_Base`               | Claude Sonnet 4.5 + Base Prompt                            |
+| `*_Empathy`                | Same models + Empathy Prompt                              |
+| `*_Rephrase`               | Same models rewriting the physician's own answer          |
+| `Gemini_Rephrase`          | Gemini 2.5 Pro (Rephrase condition only — frequently declined to answer without sufficient clinical context in Base/Empathy conditions) |
 
-📎 Prompt templates are provided in the APPENDIX of the paper.
+📎 Full prompt templates are provided in Appendix A of the paper.
 
 ---
 
-## 👥 Human Evaluation
+## 👥 Human & LLM Evaluation
 
-We conducted **dual evaluations**:
-- 🩺 **Expert Simulation** (via GPT-4o) → Precision & accuracy
-- 🧑‍⚕️ **Patient Ratings** (n=30) → Trust, empathy, comprehensibility
+- 🤖 **LLM-as-Judge** (Qwen3-32B, independent of all evaluated systems) → factual accuracy, completeness, coherence
+- 🩺 **Expert Evaluation**: a single board-certified cardiologist → clinical accuracy, stylistic appropriateness, linguistic precision
+- 🧑‍⚕️ **Patient Evaluation** (panel of 10 lay raters) → trust, comprehensibility, emotional tone
 
-**Top-rated variant overall**: `LLM FT Caring`  
-**Most empathetic**: `LLM GP Empathy`  
-**Best trade-off**: `LLM FT Empathy` (high accuracy, better readability)
+**Highest semantic fidelity overall**: `Gemini_Rephrase`
+**Most readable**: `Empathy`/`Rephrase` configurations (consistently at or below physician-level FKGL/GFI)
+**Best relational alignment (patients)**: `Rephrase` configurations
+**No epistemic superiority over physicians**, except Style on MedRedQA under Rephrase
 
 ---
 
@@ -101,19 +93,19 @@ We conducted **dual evaluations**:
 
 ```
 
-CanAIWriteLikeCaringDoctor/
+CanAIBeADoctor/
 │
-├── data/              # MedQuAD subset (processed)
-├── analysis/          # Evaluation scripts (similarity, readability, emotion)
+├── data/              # MedQuAD and MedRedQA processed subsets
+├── analysis/          # Evaluation scripts (semantic fidelity, readability, sentiment, emotion, LLM-as-judge)
 ├── results/           # Figures, tables, evaluation metrics
 └── README.md          # This file
 
 ```
 ---
 
-We welcome contributions to improve our work! To contribute, simply open a pull request or report issues on our [issue tracker](https://github.com/PRAISELab-PicusLab/CanAIWriteLikeCaringDoctor/issues). We look forward to your improvements!
+We welcome contributions to improve our work! To contribute, simply open a pull request or report issues on our [issue tracker](https://github.com/PRAISELab-PicusLab/CanAIBeADoctor/issues). We look forward to your improvements!
 
-👨‍💻 This project was developed by Mariano Barone, Antonio Romano, Giuseppe Riccio, Marco Postiglione, and Vincenzo Moscato at *University of Naples Federico II* – [PRAISE Lab - PICUS](https://github.com/PRAISELab-PicusLab/)
+👨‍💻 This project was developed by Mariano Barone, Francesco Di Serio, Roberto Moio, Marco Postiglione, Giuseppe Riccio, Antonio Romano, and Vincenzo Moscato at *University of Naples Federico II* (with Northwestern University and University of Campania "Luigi Vanvitelli") – [PRAISE Lab - PICUS](https://github.com/PRAISELab-PicusLab/)
 
 ---
 
