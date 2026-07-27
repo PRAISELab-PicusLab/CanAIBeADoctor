@@ -1,0 +1,48 @@
+\begin{table*}[t]
+\centering
+\caption{FDR-corrected $p$-values (paired $t$-test) comparing semantic similarity to the physician reference under the Main prompt versus Variant A and Variant B, for each model/condition/dataset combination. Bold indicates significance at $\alpha=0.05$.}
+\label{tab:ablation_pvalues_similarity}
+\begin{tabular}{llccc}
+\toprule
+\textbf{Dataset} & \textbf{Model} & \textbf{Condition} & \textbf{Main vs. Variant A} & \textbf{Main vs. Variant B} \\
+\midrule
+MedQuAD & Mixtral & Base & $p=0.714$ & $p=0.636$ \\
+MedQuAD & Mixtral & Empathy & \textbf{$p<0.001$} & $p=0.707$ \\
+MedQuAD & Mixtral & Rephrase & $p=0.143$ & $p=0.143$ \\
+MedQuAD & MedGemma & Base & $p=0.486$ & $p=0.486$ \\
+MedQuAD & MedGemma & Empathy & $p=0.328$ & $p=0.057$ \\
+MedQuAD & MedGemma & Rephrase & \textbf{$p<0.001$} & \textbf{$p<0.001$} \\
+MedRedQA & Mixtral & Base & $p=0.703$ & $p=0.950$ \\
+MedRedQA & Mixtral & Empathy & \textbf{$p<0.001$} & $p=0.077$ \\
+MedRedQA & Mixtral & Rephrase & \textbf{$p=0.003$} & \textbf{$p=0.003$} \\
+MedRedQA & MedGemma & Base & $p=0.064$ & $p=0.631$ \\
+MedRedQA & MedGemma & Empathy & $p=0.180$ & $p=0.401$ \\
+MedRedQA & MedGemma & Rephrase & \textbf{$p<0.001$} & $p=0.448$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{FDR-corrected $p$-values ($\chi^2$ test) comparing sentiment distribution under the Main prompt versus Variant A and Variant B, for each model/condition/dataset combination. Bold indicates significance at $\alpha=0.05$.}
+\label{tab:ablation_pvalues_sentiment}
+\begin{tabular}{llccc}
+\toprule
+\textbf{Dataset} & \textbf{Model} & \textbf{Condition} & \textbf{Main vs. Variant A} & \textbf{Main vs. Variant B} \\
+\midrule
+MedQuAD & Mixtral & Base & $p=0.950$ & $p=0.673$ \\
+MedQuAD & Mixtral & Empathy & $p=0.611$ & \textbf{$p=0.004$} \\
+MedQuAD & Mixtral & Rephrase & $p=1.000$ & $p=0.948$ \\
+MedQuAD & MedGemma & Base & $p=0.138$ & $p=0.267$ \\
+MedQuAD & MedGemma & Empathy & $p=0.615$ & $p=0.530$ \\
+MedQuAD & MedGemma & Rephrase & \textbf{$p=0.012$} & \textbf{$p=0.002$} \\
+MedRedQA & Mixtral & Base & $p=0.547$ & $p=0.547$ \\
+MedRedQA & Mixtral & Empathy & $p=0.649$ & $p=0.649$ \\
+MedRedQA & Mixtral & Rephrase & $p=0.356$ & $p=0.356$ \\
+MedRedQA & MedGemma & Base & $p=0.559$ & $p=0.559$ \\
+MedRedQA & MedGemma & Empathy & $p=0.229$ & $p=0.719$ \\
+MedRedQA & MedGemma & Rephrase & $p=0.052$ & $p=0.354$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+

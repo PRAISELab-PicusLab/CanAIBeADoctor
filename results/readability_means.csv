@@ -1,0 +1,29 @@
+dataset,system,mean_FleschKincaid,std_FleschKincaid,mean_GunningFog,std_GunningFog,n
+MedQuAD,Physicians,11.895,3.672,14.694,4.135,231
+MedQuAD,Mixtral Base,14.9,2.071,18.563,2.563,231
+MedQuAD,Mixtral Empathy,10.659,1.923,13.138,2.513,231
+MedQuAD,Mixtral Rephrase,10.683,2.001,13.322,2.377,231
+MedQuAD,MedGemma Base,16.339,1.989,20.176,2.296,231
+MedQuAD,MedGemma Empathy,10.257,1.59,12.703,1.933,231
+MedQuAD,MedGemma Rephrase,11.153,2.245,13.533,2.738,231
+MedQuAD,GPT Base,17.816,2.819,21.784,3.105,231
+MedQuAD,GPT Empathy,10.717,1.563,13.148,1.877,231
+MedQuAD,GPT Rephrase,11.66,2.106,14.144,2.474,231
+MedQuAD,Gemini Rephrase,13.589,2.341,16.375,2.797,231
+MedQuAD,Claude Base,20.871,2.372,24.84,2.662,231
+MedQuAD,Claude Empathy,11.864,1.513,14.217,1.722,231
+MedQuAD,Claude Rephrase,11.965,2.257,14.429,2.634,231
+MedRedQA,Physicians,10.314,2.721,12.95,2.993,200
+MedRedQA,Mixtral Base,15.456,1.708,19.007,2.002,200
+MedRedQA,Mixtral Empathy,10.499,1.72,12.908,2.062,200
+MedRedQA,Mixtral Rephrase,9.761,1.812,12.291,2.049,200
+MedRedQA,MedGemma Base,16.77,2.005,20.541,2.37,200
+MedRedQA,MedGemma Empathy,9.881,1.598,12.228,1.773,200
+MedRedQA,MedGemma Rephrase,10.341,1.802,12.681,2.05,200
+MedRedQA,GPT Base,17.969,2.228,21.876,2.514,200
+MedRedQA,GPT Empathy,9.921,1.6,12.317,1.719,200
+MedRedQA,GPT Rephrase,10.054,1.935,12.459,2.246,200
+MedRedQA,Gemini Rephrase,11.961,2.523,14.587,2.727,200
+MedRedQA,Claude Base,21.771,2.592,25.546,3.061,200
+MedRedQA,Claude Empathy,11.205,1.616,13.378,1.72,200
+MedRedQA,Claude Rephrase,11.196,1.856,13.57,2.053,200

@@ -1,0 +1,67 @@
+\subsection{RQ2 -- LLM-as-Judge Evaluation}
+
+To complement the embedding-based semantic fidelity metric with a more interpretable, human-like assessment, we conducted an additional evaluation using an LLM-as-judge protocol with \texttt{Qwen3-32B}\footnote{\url{https://huggingface.co/Qwen/Qwen3-32B}} \cite{qwen3technicalreport} as the evaluator model. Rather than producing a single combined score, the judge issues three independent verdicts per candidate answer, each from a separate, isolated call with its own dedicated prompt and no shared context across axes, so that a weakness identified on one axis cannot bias the score on another:
+
+\begin{itemize}
+    \item \textbf{Factual accuracy} -- whether the medical facts, figures, and claims in the candidate answer are correct and consistent with the physician's reference answer.
+    \item \textbf{Completeness} -- whether the candidate covers the clinically important information present in the reference (key facts, warnings, next steps), without penalizing correct and relevant additional content.
+    \item \textbf{Coherence} -- whether the candidate is internally coherent and medically sound, independent of the reference: free of self-contradictions, logically structured, and clinically appropriate for the question asked.
+\end{itemize}
+
+Each axis is scored on a discrete 1--5 scale, with the judge required to return a single JSON object containing the integer score and a one-sentence justification, generated with greedy (deterministic) decoding for reproducibility. The full prompts used for each axis are reported in Appendix~\ref{app:llm_judge_prompts}. This evaluation was run on both extended datasets, MedQuAD ($n=231$) and MedRedQA ($n=200$), across all model/condition combinations retained in the rest of the analysis (Gemini restricted to the Rephrase configuration, consistent with the rest of the study).
+
+Tables~\ref{tab:llm_judge_medquad} and~\ref{tab:llm_judge_medredqa} report the mean score per axis for each system on the two datasets.
+
+\begin{table*}[t]
+\centering
+\caption{LLM-as-judge evaluation (Qwen3-32B) on the MedQuAD dataset ($n=231$). Each axis is scored independently on a 1--5 scale by a separate judge call.}
+\label{tab:llm_judge_medquad}
+\resizebox{0.85\textwidth}{!}{
+\begin{tabular}{lcccc}
+\toprule
+\textbf{System} & \textbf{Factual} & \textbf{Completeness} & \textbf{Coherence} & \textbf{Mean} \\
+\midrule
+Mixtral (BASE) & 4.03 & 3.85 & 4.17 & 4.01 \\
+Mixtral\_Empathy & 3.73 & 3.51 & 3.88 & 3.71 \\
+Mixtral\_Rephrase & 4.73 & 4.66 & 4.71 & 4.70 \\
+MedGemma (BASE) & 3.88 & 3.78 & 4.02 & 3.89 \\
+MedGemma\_Empathy & 3.93 & 3.83 & 4.13 & 3.96 \\
+MedGemma\_Rephrase & 4.81 & 4.80 & 4.80 & 4.80 \\
+GPT (BASE) & 3.84 & 3.76 & 3.97 & 3.86 \\
+GPT\_Empathy & 3.85 & 3.77 & 4.01 & 3.88 \\
+GPT\_Rephrase & 4.85 & 4.84 & 4.85 & 4.85 \\
+Gemini\_Rephrase & 4.92 & 4.86 & 4.91 & 4.89 \\
+Claude (BASE) & 4.04 & 3.99 & 4.09 & 4.04 \\
+Claude\_Empathy & 3.87 & 3.85 & 3.99 & 3.90 \\
+Claude\_Rephrase & 4.72 & 4.65 & 4.70 & 4.69 \\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{LLM-as-judge evaluation (Qwen3-32B) on the MedRedQA dataset ($n=200$). Each axis is scored independently on a 1--5 scale by a separate judge call.}
+\label{tab:llm_judge_medredqa}
+\resizebox{0.85\textwidth}{!}{
+\begin{tabular}{lcccc}
+\toprule
+\textbf{System} & \textbf{Factual} & \textbf{Completeness} & \textbf{Coherence} & \textbf{Mean} \\
+\midrule
+Mixtral (BASE) & 2.88 & 2.77 & 3.12 & 2.92 \\
+Mixtral\_Empathy & 2.81 & 2.77 & 3.10 & 2.89 \\
+Mixtral\_Rephrase & 4.45 & 4.42 & 4.22 & 4.36 \\
+MedGemma (BASE) & 2.87 & 2.73 & 3.12 & 2.90 \\
+MedGemma\_Empathy & 3.17 & 3.01 & 3.37 & 3.18 \\
+MedGemma\_Rephrase & 4.56 & 4.56 & 4.49 & 4.54 \\
+GPT (BASE) & 2.81 & 2.69 & 3.10 & 2.87 \\
+GPT\_Empathy & 3.10 & 3.04 & 3.32 & 3.15 \\
+GPT\_Rephrase & 4.71 & 4.72 & 4.62 & 4.69 \\
+Gemini\_Rephrase & 4.79 & 4.79 & 4.63 & 4.74 \\
+Claude (BASE) & 2.82 & 2.85 & 3.08 & 2.92 \\
+Claude\_Empathy & 3.20 & 3.15 & 3.36 & 3.24 \\
+Claude\_Rephrase & 4.71 & 4.72 & 4.62 & 4.69 \\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+Two patterns emerge consistently across both datasets. First, Rephrase configurations achieve the highest scores on all three axes for every model, corroborating the semantic-similarity results in Section~\ref{sec:semantic_fidelity} with an independent evaluation method: the improvement in physician alignment observed under Rephrase is not an artifact of the embedding-based similarity metric alone. Second, the gap between Base/Empathy and Rephrase is substantially wider on MedRedQA (e.g., Mixtral: 2.92 vs.\ 4.36 mean score) than on MedQuAD (e.g., Mixtral: 4.02 vs.\ 4.70), mirroring the lower baseline semantic similarity observed on MedRedQA's more heterogeneous, conversational source material. Coherence scores are consistently the highest of the three axes across nearly all systems, indicating that even lower-scoring configurations rarely produce internally contradictory or clinically nonsensical text -- weaknesses are concentrated in factual precision and completeness relative to the reference rather than in reasoning structure.

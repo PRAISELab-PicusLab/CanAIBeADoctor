@@ -1,0 +1,252 @@
+\begin{table*}
+\centering
+\caption{Percentage distribution of sentiment labels per system on MedQuAD dataset (extended, n=231). Arrows indicate comparison to Doctor: \textcolor{red}{$\uparrow$} = higher, \textcolor{blue}{$\downarrow$} = lower, \textcolor{gray}{-} = similar.}
+\label{tab:sentiment_distribution_medquad_ext}
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{lccccc}
+\toprule
+\textbf{System} & \textbf{Very Negative (\%)} & \textbf{Negative (\%)} & \textbf{Neutral (\%)} & \textbf{Positive (\%)} & \textbf{Very Positive (\%)} \\
+\midrule
+\textit{Physician Answer}
+& \textit{18.61} 
+& \textit{5.63} 
+& \textit{75.76} 
+& \textit{0.00} 
+& \textit{0.00} 
+\\
+\midrule
+
+Mixtral (BASE)
+& 14.29 ({\color{blue}$\downarrow$}) 
+& 0.87 ({\color{blue}$\downarrow$}) 
+& 84.42 ({\color{red}$\uparrow$}) 
+& 0.43 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+Mixtral\_Empathy Prompt
+& 2.60 ({\color{blue}$\downarrow$}) 
+& 6.49 ({\color{red}$\uparrow$}) 
+& 89.61 ({\color{red}$\uparrow$}) 
+& 1.30 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+Mixtral\_Rephrase
+& 5.19 ({\color{blue}$\downarrow$}) 
+& 5.63 ({\color{gray}---}) 
+& 87.45 ({\color{red}$\uparrow$}) 
+& 1.30 ({\color{red}$\uparrow$}) 
+& 0.43 ({\color{red}$\uparrow$}) 
+\\
+
+MedGemma (BASE)
+& 14.72 ({\color{blue}$\downarrow$}) 
+& 1.73 ({\color{blue}$\downarrow$}) 
+& 83.55 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+MedGemma\_Empathy Prompt
+& 1.30 ({\color{blue}$\downarrow$}) 
+& 11.69 ({\color{red}$\uparrow$}) 
+& 83.12 ({\color{red}$\uparrow$}) 
+& 3.46 ({\color{red}$\uparrow$}) 
+& 0.43 ({\color{red}$\uparrow$}) 
+\\
+
+MedGemma\_Rephrase
+& 8.23 ({\color{blue}$\downarrow$}) 
+& 9.09 ({\color{red}$\uparrow$}) 
+& 82.25 ({\color{red}$\uparrow$}) 
+& 0.43 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+GPT (BASE)
+& 19.48 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+& 80.52 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+GPT\_Empathy Prompt
+& 5.19 ({\color{blue}$\downarrow$}) 
+& 13.85 ({\color{red}$\uparrow$}) 
+& 79.22 ({\color{red}$\uparrow$}) 
+& 1.73 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+GPT\_Rephrase
+& 13.42 ({\color{blue}$\downarrow$}) 
+& 9.96 ({\color{red}$\uparrow$}) 
+& 75.76 ({\color{gray}---}) 
+& 0.87 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+Gemini\_Rephrase
+& 14.29 ({\color{blue}$\downarrow$}) 
+& 7.79 ({\color{red}$\uparrow$}) 
+& 77.92 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+Claude (BASE)
+& 21.21 ({\color{red}$\uparrow$}) 
+& 3.90 ({\color{blue}$\downarrow$}) 
+& 74.89 ({\color{blue}$\downarrow$}) 
+& 0.00 ({\color{gray}---}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+Claude\_Empathy Prompt
+& 3.46 ({\color{blue}$\downarrow$}) 
+& 22.51 ({\color{red}$\uparrow$}) 
+& 70.56 ({\color{blue}$\downarrow$}) 
+& 2.60 ({\color{red}$\uparrow$}) 
+& 0.87 ({\color{red}$\uparrow$}) 
+\\
+
+Claude\_Rephrase
+& 5.19 ({\color{blue}$\downarrow$}) 
+& 7.79 ({\color{red}$\uparrow$}) 
+& 86.58 ({\color{red}$\uparrow$}) 
+& 0.43 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{gray}---}) 
+\\
+
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+\begin{table*}
+\centering
+\caption{Percentage distribution of sentiment labels per system on the MedRedQA dataset (extended, n=200). Arrows indicate comparison to Physician: \textcolor{red}{$\uparrow$} = higher, \textcolor{blue}{$\downarrow$} = lower, \textcolor{gray}{-} = similar.}
+\label{tab:sentiment_distribution_medredqa_ext}
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{lccccc}
+\toprule
+\textbf{System} & \textbf{Very Negative (\%)} & \textbf{Negative (\%)} & \textbf{Neutral (\%)} & \textbf{Positive (\%)} & \textbf{Very Positive (\%)} \\
+\midrule
+\textit{Physician Answer}
+& \textit{7.00} 
+& \textit{14.00} 
+& \textit{73.00} 
+& \textit{4.50} 
+& \textit{1.50} 
+\\
+\midrule
+
+Mixtral (BASE)
+& 4.50 ({\color{blue}$\downarrow$}) 
+& 3.00 ({\color{blue}$\downarrow$}) 
+& 92.00 ({\color{red}$\uparrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+\\
+
+Mixtral\_Empathy Prompt
+& 3.00 ({\color{blue}$\downarrow$}) 
+& 4.50 ({\color{blue}$\downarrow$}) 
+& 89.00 ({\color{red}$\uparrow$}) 
+& 3.50 ({\color{blue}$\downarrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+\\
+
+Mixtral\_Rephrase
+& 3.00 ({\color{blue}$\downarrow$}) 
+& 10.50 ({\color{blue}$\downarrow$}) 
+& 78.00 ({\color{red}$\uparrow$}) 
+& 8.00 ({\color{red}$\uparrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+\\
+
+MedGemma (BASE)
+& 8.50 ({\color{red}$\uparrow$}) 
+& 2.00 ({\color{blue}$\downarrow$}) 
+& 89.50 ({\color{red}$\uparrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+\\
+
+MedGemma\_Empathy Prompt
+& 4.00 ({\color{blue}$\downarrow$}) 
+& 15.00 ({\color{red}$\uparrow$}) 
+& 77.50 ({\color{red}$\uparrow$}) 
+& 3.50 ({\color{blue}$\downarrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+\\
+
+MedGemma\_Rephrase
+& 4.00 ({\color{blue}$\downarrow$}) 
+& 14.00 ({\color{gray}---}) 
+& 78.00 ({\color{red}$\uparrow$}) 
+& 3.00 ({\color{blue}$\downarrow$}) 
+& 1.00 ({\color{blue}$\downarrow$}) 
+\\
+
+GPT (BASE)
+& 7.00 ({\color{gray}---}) 
+& 1.00 ({\color{blue}$\downarrow$}) 
+& 90.50 ({\color{red}$\uparrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+& 1.00 ({\color{blue}$\downarrow$}) 
+\\
+
+GPT\_Empathy Prompt
+& 5.00 ({\color{blue}$\downarrow$}) 
+& 11.50 ({\color{blue}$\downarrow$}) 
+& 80.00 ({\color{red}$\uparrow$}) 
+& 2.00 ({\color{blue}$\downarrow$}) 
+& 1.50 ({\color{gray}---}) 
+\\
+
+GPT\_Rephrase
+& 5.50 ({\color{blue}$\downarrow$}) 
+& 11.00 ({\color{blue}$\downarrow$}) 
+& 80.00 ({\color{red}$\uparrow$}) 
+& 3.00 ({\color{blue}$\downarrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+\\
+
+Gemini\_Rephrase
+& 8.00 ({\color{red}$\uparrow$}) 
+& 17.50 ({\color{red}$\uparrow$}) 
+& 64.50 ({\color{blue}$\downarrow$}) 
+& 7.00 ({\color{red}$\uparrow$}) 
+& 3.00 ({\color{red}$\uparrow$}) 
+\\
+
+Claude (BASE)
+& 8.50 ({\color{red}$\uparrow$}) 
+& 2.00 ({\color{blue}$\downarrow$}) 
+& 88.50 ({\color{red}$\uparrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+\\
+
+Claude\_Empathy Prompt
+& 12.00 ({\color{red}$\uparrow$}) 
+& 20.00 ({\color{red}$\uparrow$}) 
+& 65.00 ({\color{blue}$\downarrow$}) 
+& 3.00 ({\color{blue}$\downarrow$}) 
+& 0.00 ({\color{blue}$\downarrow$}) 
+\\
+
+Claude\_Rephrase
+& 8.50 ({\color{red}$\uparrow$}) 
+& 15.50 ({\color{red}$\uparrow$}) 
+& 68.00 ({\color{blue}$\downarrow$}) 
+& 7.50 ({\color{red}$\uparrow$}) 
+& 0.50 ({\color{blue}$\downarrow$}) 
+\\
+
+\bottomrule
+\end{tabular}}
+\end{table*}
+

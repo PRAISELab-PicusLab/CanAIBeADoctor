@@ -1,0 +1,41 @@
+\subsubsection*{MedRedQA Subset Construction}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1.00\linewidth]{img/New_Image/Medredqa/scatter_cluster_representativeness.pdf}
+    \caption{Clustering-based selection of 200 representative MedRedQA samples.
+    The full candidate corpus (blue) is visualized in the Flesch--Kincaid vs.\ Gunning-Fog space,
+    with the 200 selected representatives (orange) overlaid.
+    Representatives are chosen via a single, unstratified k-means clustering
+    ($k=200$) over the normalized linguistic feature space, one representative
+    per cluster centroid. The resulting subset preserves the readability
+    variability of the full corpus without collapsing toward its central tendency.}
+    \label{fig:clustering_representatives_medredqa}
+\end{figure}
+
+For MedRedQA, subset construction relied purely on linguistic stratification, since no clinical severity/triage metadata is available for this corpus. The goal was to select genuine, substantive physician responses that span the full range of linguistic complexity present in the raw corpus.
+
+\begin{enumerate}
+    \item \textbf{Filter genuine long-form answers:}
+    From the raw 40{,}766-row corpus, retain only responses that are substantive answers rather than clarifying follow-up questions or one-line replies: at least 50 words, not ending in a question mark, and containing fewer than 2 question marks overall. This yields 13{,}366 candidate rows.
+
+    \item \textbf{Extract linguistic features:}
+    Compute FKGL, GFI, TF-IDF-based lexical representativeness (cosine similarity to the corpus centroid), and answer length (word count) for each candidate.
+
+    \item \textbf{Remove readability outliers:}
+    Apply IQR-based outlier removal on FKGL and GFI jointly, yielding 13{,}107 rows.
+
+    \item \textbf{Normalize features:}
+    Apply z-score normalization to all four linguistic features (FKGL, GFI, lexical representativeness, length).
+
+    \item \textbf{Cluster the full pool:}
+    Perform a single k-means clustering ($k=200$) over the normalized feature space, without any category- or severity-based stratification.
+
+    \item \textbf{Select representatives:}
+    For each of the 200 clusters, select the sample closest to its centroid as the representative.
+
+    \item \textbf{Aggregate subset:}
+    Combine the 200 selected samples into $D^{\text{MedRedQA}}_{200}$.
+\end{enumerate}
+
+Figure~\ref{fig:clustering_representatives_medredqa} shows that the resulting subset closely tracks the readability distribution of the full corpus, confirming that the selection avoids over-concentrating on any single region of the Flesch--Kincaid/Gunning-Fog space. Representativeness here is defined purely in linguistic terms, reflecting the absence of clinical urgency metadata for this corpus.
